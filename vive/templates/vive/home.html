@@ -1,0 +1,14 @@
+{% extends "vive/base.html" %}
+
+{% block content %}
+    {% for friend in friends %}
+        <div class="container" style="flex-wrap: wrap;display: flex;align-items: center;justify-content: space-around;">
+            <img class="image is-128x128" src="{{ friend.author.profile.image.url }}">
+            <div class="box" style="min-width: 430px;flex-grow: 1">
+            <p>The guy in front of you is <b>{{ friend.name }}</b>.</p>
+            <p>Spent {{ friend.age }} years on Earth and was delivered in <i>{{ friend.city }}</i>.</p>
+            <p>Added to the server on {{ friend.date_posted|date:"F d, Y" }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

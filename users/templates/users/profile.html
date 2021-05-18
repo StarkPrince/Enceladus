@@ -1,0 +1,22 @@
+{% extends "vive/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section container" style="padding: 20px">
+      <div class="media" style="padding-left: 2em;margin: 1em">
+          <figure class="image"><img class="image is-128x128" src="{{ user.profile.image.url }}"></figure>
+        <div class="media-right" style="padding-left:1em">
+          <h3 class="account-heading">{{ user.username }}</h3>
+          <h4 class="text-secondary">{{ user.email }}</h4>
+        </div>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group container">
+                <legend class="border-box-sizing"> <b>Profile Info</b></legend>
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            <div class="field"><p class="control text-muted"><button class="button is-info is-small">Update</button></p></div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}

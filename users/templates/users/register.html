@@ -1,0 +1,27 @@
+{% extends "vive/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container content-section" style="padding:20px;line-height:1.8;">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-box-sizing"> <b>Join today</b></legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="field">
+                <p class="control text-muted">
+                    <button class="button is-info is-small">
+                    Sign Up
+                    </button>
+                </p>
+            </div>
+        </form>
+        <footer class="card-footer field content" style="padding-top: 1em;">
+            <p class="control text-muted">Already Have an account?
+                <button class="button is-success is-small"><a href="{% url 'login' %}">
+                Sign In</a>
+                </button>
+            </p>
+        </footer>
+    </div>
+{%  endblock content %}
