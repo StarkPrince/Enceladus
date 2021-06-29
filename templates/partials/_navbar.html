@@ -24,13 +24,13 @@
                 {% endif %} >
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
-                <li {% if '/' == request.path %}
+                <li {% if '/listings/' == request.path %}
                     class="nav-item active mr-3"
                 {% else %}
                     class="nav-item mr-3"
                 {% endif %} >
                     {# to change#}
-                    <a class="nav-link" href="{% url 'index' %}">Featured Listings</a>
+                    <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
