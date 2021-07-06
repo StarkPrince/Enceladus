@@ -9,7 +9,7 @@ SECRET_KEY = '7)mio^xmnjh!q)28xja_wxfp=9cy5s&7+8ljbi)-vnmsid55!s'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['prrealestate.herokuapp.com']
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
