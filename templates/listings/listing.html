@@ -2,15 +2,16 @@
 
 {% load humanize %}
 
-{% block content %}
+{% block title %} {{ listing.title }} {% endblock %}
 
+{% block content %}
     <section id="showcase-inner" class="py-5 text-white">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
                     <h1 class="display-4">{{ listing.title }}</h1>
                     <p class="lead">
-                        <i class="fas fa-map-marker"></i> {{ listing.title }} {{ listing.city }}, {{ listing.zipcode }}
+                        <i class="fas fa-map-marker"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}
                     </p>
                 </div>
             </div>
@@ -28,11 +29,14 @@
                     <li class="breadcrumb-item">
                         <a href="{% url 'listings' %}">Listings</a>
                     </li>
-                    <li class="breadcrumb-item active">{{ listing.title }} </li>
+                    <li class="breadcrumb-item active">{{ listing.title }}</li>
                 </ol>
             </nav>
         </div>
     </section>
+
+    <!-- Alerts -->
+    {% include 'partials/_alerts.html' %}
 
     <!-- Listing -->
     <section id="listing" class="py-4">
@@ -85,15 +89,15 @@
                                     <img src="{{ listing.photo_6.url }}" alt="" class="img-fluid">
                                 </a>
                             </div>
-                            </div>
                         {% endif %}
+                    </div>
                     <!-- Fields -->
                     <div class="row mb-5 fields">
                         <div class="col-md-6">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-money-bill-alt"></i> Asking Price:
-                                    <span class="float-right">₹{{ listing.price }}</span>
+                                    <span class="float-right">₹{{ listing.price | intcomma }}</span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-bed"></i> Bedrooms:
@@ -105,7 +109,8 @@
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-car"></i> Garage:
-                                    <span class="float-right">{{ listing.garage }}</span>
+                                    <span class="float-right">{{ listing.garage }}
+                  </span>
                                 </li>
                             </ul>
                         </div>
@@ -117,7 +122,8 @@
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-square"></i> Lot Size:
-                                    <span class="float-right">{{ listing.lot_size }} Acres</span>
+                                    <span class="float-right">{{ listing.lot_size }} Acres
+                  </span>
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-calendar"></i> Listing Date:
@@ -125,8 +131,11 @@
                                 </li>
                                 <li class="list-group-item text-secondary">
                                     <i class="fas fa-bed"></i> Realtor:
-                                    <span class="float-right">{{ listing.realtor }}</span>
+                                    <span class="float-right">{{ listing.realtor }}
+                  </span>
                                 </li>
+
+
                             </ul>
                         </div>
                     </div>
@@ -140,7 +149,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="card mb-3">
-                        <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="Seller of the month">
+                        <img class="card-img-top" src="{{ listing.realtor.photo.url }}" alt="">
                         <div class="card-body">
                             <h5 class="card-title">Property Realtor</h5>
                             <h6 class="text-secondary">{{ listing.realtor }}</h6>
@@ -165,18 +174,28 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="{% url 'contact' %}" method="POST">
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                        {% else %}
+                            <input type="hidden" name="user_id" value="0">
+                        {% endif %}
+                        <input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
+                        <input type="hidden" name="listing_id" value="{{ listing.id }}">
                         <div class="form-group">
                             <label for="property_name" class="col-form-label">Property:</label>
-                            <input type="text" name="listing" class="form-control" value="{{ listing.title }}" disabled>
+                            <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
                         </div>
                         <div class="form-group">
                             <label for="name" class="col-form-label">Name:</label>
-                            <input type="text" name="name" class="form-control" required>
+                            <input type="text" name="name" class="form-control" {% if user.is_authenticated %}
+                                   value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
                         </div>
                         <div class="form-group">
                             <label for="email" class="col-form-label">Email:</label>
-                            <input type="email" name="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" {% if user.is_authenticated %}
+                                   value="{{ user.email }}" {% endif %} required>
                         </div>
                         <div class="form-group">
                             <label for="phone" class="col-form-label">Phone:</label>
@@ -193,5 +212,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

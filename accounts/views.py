@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
+from contacts.models import Contact
+
 
 # Create your views here.
 def register(request):
@@ -21,8 +23,8 @@ def register(request):
                                                     last_name=last_name)
                     auth.login(request, user)
                     user.save()
-                    messages.success('Logged in')
-                    return redirect('index')
+                    messages.success(request, 'Logged in')
+                    return redirect('dashboard')
                 else:
                     messages.error(request, 'The email is already registered')
                     return redirect('register')
@@ -38,15 +40,30 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        pass
-    # Login user
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(username=username, password=password)
+        if user:
+            auth.login(request, user)
+            messages.success(request, 'You are now Logged in')
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'wrong username or password')
+            return redirect('login')
     else:
         return render(request, "accounts/login.html")
 
 
 def logout(request):
-    return redirect('index')
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'Logged out')
+        return redirect('index')
+    else:
+        return redirect('index')
 
 
 def dashboard(request):
-    return render(request, "accounts/dashboard.html")
+    user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
+    context = {'contacts': user_contacts}
+    return render(request, "accounts/dashboard.html",context)
