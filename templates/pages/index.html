@@ -2,6 +2,8 @@
 
 {% load humanize %}
 
+{% block title %} Welcome {% endblock %}
+
 {% block content %}
     <!-- Showcase -->
     <section id="showcase">
@@ -11,27 +13,28 @@
                     <h1 class="display-4 mb-4">
                         Property Searching Just Got So Easy
                     </h1>
-                    <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas,
-                        asperiores eveniet vel nostrum magnam
-                        voluptatum tempore! Consectetur, id commodi!</p>
+                    <p class="lead">Lorem ipsum dolor sit amet consecrated animistic elite. Incident, debits nam!
+                        Repudiate,
+                        provident site consequent
+                        hic diagnosis ration ea qua.</p>
                     <div class="search">
-                        <form action="{%  url 'search' %}">
+                        <form action="{% url 'search' %}">
                             <!-- Form Row 1 -->
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
-                                    <label class="sr-only">Keywords</label>
+                                    <label class="sr-only" for="keywords">Keywords</label>
                                     <input type="text" name="keywords" class="form-control"
-                                           placeholder="Keyword (Pool, Garage, etc)">
+                                           placeholder="Keyword (Pool, Garage, etc)" id="keywords">
                                 </div>
 
                                 <div class="col-md-4 mb-3">
-                                    <label class="sr-only">City</label>
-                                    <input type="text" name="city" class="form-control" placeholder="City">
+                                    <label class="sr-only" for="city">City</label>
+                                    <input type="text" name="city" class="form-control" placeholder="City" id="city">
                                 </div>
 
                                 <div class="col-md-4 mb-3">
-                                    <label class="sr-only">State</label>
-                                    <select name="state" class="form-control">
+                                    <label class="sr-only" for="state">State</label>
+                                    <select name="state" class="form-control" id="state">
                                         <option selected="true" disabled="disabled">State (All)</option>
                                         {% for key,value in state_choices.items %}
                                             <option value="{{ value }}">{{ value }}</option>
@@ -42,8 +45,8 @@
                             <!-- Form Row 2 -->
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="sr-only">Bedrooms</label>
-                                    <select name="bedrooms" class="form-control">
+                                    <label class="sr-only" for="bedrooms">Bedrooms</label>
+                                    <select name="bedrooms" class="form-control" id="bedrooms">
                                         <option selected="true" disabled="disabled">Bedrooms (All)</option>
                                         {% for key,value in bedroom_choices.items %}
                                             <option value="{{ value }}">{{ key }}</option>
@@ -66,7 +69,8 @@
             </div>
         </div>
     </section>
-
+    <!--Alerts -->
+    {% include 'partials/_alerts.html' %}
     <!-- Listings -->
     <section id="listings" class="py-5">
         <div class="container">
@@ -91,7 +95,7 @@
                                     <hr>
                                     <div class="row py-2 text-secondary">
                                         <div class="col-6">
-                                            <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}
+                                            <i class="fas fa-th-large"></i> Sq.ft: {{ listing.sqft }}
                                         </div>
                                         <div class="col-6">
                                             <i class="fas fa-car"></i> Garage: {{ listing.garage }}
@@ -139,25 +143,25 @@
                     <i class="fas fa-comment fa-4x mr-4"></i>
                     <hr>
                     <h3>Consulting Services</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae,
-                        provident iste consequatur
-                        hic dignissimos ratione ea quae.</p>
+                    <p>Lorem ipsum dolor sit amet consecrated animistic elite. Incident, debits nam! Repudiate,
+                        provident site consequent
+                        hic diagnosis ration ea qua.</p>
                 </div>
                 <div class="col-md-4">
                     <i class="fas fa-home fa-4x mr-4"></i>
                     <hr>
-                    <h3>Propery Management</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae,
-                        provident iste consequatur
-                        hic dignissimos ratione ea quae.</p>
+                    <h3>Property Management</h3>
+                    <p>Lorem ipsum dolor sit amet consecrated animistic elite. Incident, debits nam! Repudiate,
+                        provident site consequent
+                        hic diagnosis ration ea qua.</p>
                 </div>
                 <div class="col-md-4">
                     <i class="fas fa-suitcase fa-4x mr-4"></i>
                     <hr>
                     <h3>Renting & Selling</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae,
-                        provident iste consequatur
-                        hic dignissimos ratione ea quae.</p>
+                    <p>Lorem ipsum dolor sit amet consecrated animistic elite. Incident, debits nam! Repudiate,
+                        provident site consequent
+                        hic diagnosis ration ea qua.</p>
                 </div>
             </div>
         </div>
