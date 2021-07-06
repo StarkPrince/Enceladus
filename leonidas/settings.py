@@ -59,10 +59,12 @@ WSGI_APPLICATION = 'leonidas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prredb',
-        'USER': 'postgres',
-        'PASSWORD': 'M14t85u2m1nt93S',
-        'HOST': 'localhost'
+        'NAME': 'dbqb9tmt1o58am',
+        'USER': 'thgzpturowndlj',
+        'PASSWORD': '3933fa2b3798f43dcad3ccf5dde9f7872cc2580d87595ec0b8fddbfb0344515c',
+        'HOST': 'ec2-52-45-183-77.compute-1.amazonaws.com',
+        'PORT' : 5432,
+
     }
 }
 
