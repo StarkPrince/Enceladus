@@ -76,7 +76,6 @@ hyperframe==5.2.0
 identify==1.5.12
 idna==2.10
 ImageHash==4.2.0
-importlib==1.0.4
 ipykernel==5.3.4
 ipython==7.18.1
 ipython-genutils==0.2.0
