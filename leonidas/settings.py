@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '7)mio^xmnjh!q)28xja_wxfp=9cy5s&7+8ljbi)-vnmsid55!s'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['prrealestate.herokuapp.com']
 
@@ -64,7 +64,7 @@ DATABASES = {
         'USER': 'thgzpturowndlj',
         'PASSWORD': '3933fa2b3798f43dcad3ccf5dde9f7872cc2580d87595ec0b8fddbfb0344515c',
         'HOST': 'ec2-52-45-183-77.compute-1.amazonaws.com',
-        'PORT' : 5432,
+        'PORT': 5432,
 
     }
 }
@@ -113,4 +113,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'games.princeraj@gmail.com'
 EMAIL_HOST_PASSWORD = 'GameChanger'
 EMAIL_USE_TLS = True
-# hey
