@@ -60,15 +60,13 @@ WSGI_APPLICATION = 'leonidas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbqb9tmt1o58am',
-        'USER': 'thgzpturowndlj',
-        'PASSWORD': '3933fa2b3798f43dcad3ccf5dde9f7872cc2580d87595ec0b8fddbfb0344515c',
+        'NAME': 'd4sa61bhknctoi',
+        'USER': 'tjlooptivvqqfk',
+        'PASSWORD': '8091aab12543fde5f9a0b2ca712c43d500325ef504db6fac3ed7fd3e15d20954',
         'HOST': 'ec2-52-45-183-77.compute-1.amazonaws.com',
         'PORT': 5432,
-
     }
 }
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
