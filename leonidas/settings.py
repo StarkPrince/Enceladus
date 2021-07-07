@@ -111,3 +111,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'games.princeraj@gmail.com'
 EMAIL_HOST_PASSWORD = 'GameChanger'
 EMAIL_USE_TLS = True
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
