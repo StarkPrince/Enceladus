@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '7)mio^xmnjh!q)28xja_wxfp=9cy5s&7+8ljbi)-vnmsid55!s'
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['prrealestate.herokuapp.com']
 
