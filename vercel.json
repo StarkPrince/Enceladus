@@ -1,16 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "Django",
-      "use": "@vercel/python"
-    }
-  ],
+  "builds": [{ "src": "manage.py", "use": "@vercel/python" }],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+    { "src": "/static/(.*)", "dest": "/static/$1" },
+    { "src": "/media/(.*)", "dest": "/media/$1" },
+    { "src": "/(.*)", "dest": "manage.py" }
   ],
   "env": {
     "DATABASE_URL": "${DATABASE_URL}"

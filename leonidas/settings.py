@@ -7,11 +7,13 @@ from django.contrib.messages import constants as messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = '7)mio^xmnjh!q)28xja_wxfp=9cy5s&7+8ljbi)-vnmsid55!s'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
 
-DEBUG = True
 
-ALLOWED_HOSTS = ['prrealestate.herokuapp.com', 'inhomes-oyre054o8-starkprinces-projects.vercel.app','inhomes.vercel.app', 'localhost', '127.0.0.1']
+DEBUG = False
+
+ALLOWED_HOSTS = ['inhomes.vercel.app', 'localhost', '127.0.0.1']
+
 TAILWIND_APP_NAME = 'theme'
 
 INSTALLED_APPS = [
@@ -37,13 +39,13 @@ INTERNAL_IPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'leonidas.urls'
@@ -138,11 +140,10 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
-# email config
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'games.princeraj@gmail.com'
-EMAIL_HOST_PASSWORD = 'GameChanger'
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = os.getenv('EMAIL_PORT', 587)
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
