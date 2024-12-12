@@ -72,27 +72,6 @@ WSGI_APPLICATION = 'leonidas.wsgi.application'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'd4sa61bhknctoi',
-#         'USER': 'tjlooptivvqqfk',
-#         'PASSWORD': '8091aab12543fde5f9a0b2ca712c43d500325ef504db6fac3ed7fd3e15d20954',
-#         'HOST': 'ec2-52-45-183-77.compute-1.amazonaws.com',
-#         'PORT': 5432,
-#     }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'realestate',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Prince@2002',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
