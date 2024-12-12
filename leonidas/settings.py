@@ -12,7 +12,9 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['inhomes-ilz80ii7b-starkprinces-projects.vercel.app', 'inhomes.vercel.app', 'localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['inhomes-ilz80ii7b-starkprinces-projects.vercel.app', 'inhomes.vercel.app', 'localhost', '127.0.0.1', 'inhomes-41ygtl8lw-starkprinces-projects.vercel.app']
+ALLOWED_HOSTS = ['*']
+
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -131,7 +133,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'leonidas/static')
+    os.path.join(BASE_DIR, 'static')
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
