@@ -11,7 +11,7 @@ SECRET_KEY = '7)mio^xmnjh!q)28xja_wxfp=9cy5s&7+8ljbi)-vnmsid55!s'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['prrealestate.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['prrealestate.herokuapp.com', 'inhomes-oyre054o8-starkprinces-projects.vercel.app','inhomes.vercel.app', 'localhost', '127.0.0.1']
 TAILWIND_APP_NAME = 'theme'
 
 INSTALLED_APPS = [
