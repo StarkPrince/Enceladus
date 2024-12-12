@@ -12,7 +12,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['inhomes.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['inhomes-ilz80ii7b-starkprinces-projects.vercel.app', 'inhomes.vercel.app', 'localhost', '127.0.0.1']
 
 TAILWIND_APP_NAME = 'theme'
 
