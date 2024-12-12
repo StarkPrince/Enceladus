@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block title %}{{ listing.title }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-white">
+    <header class="bg-black text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-2">{{ listing.title }}</h1>
+            <p class="text-xl flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}
+            </p>
+        </div>
+    </header>
+
+    <nav class="container mx-auto px-4 py-6">
+        <ol class="flex text-sm">
+            <li class="mr-2">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-black transition duration-300">Home</a>
+            </li>
+            <li class="mr-2">
+                <a href="{% url 'listings' %}" class="text-gray-600 hover:text-black transition duration-300">Listings</a>
+            </li>
+            <li class="text-black font-semibold">{{ listing.title }}</li>
+        </ol>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="lg:col-span-2">
+                <!-- Main Image -->
+                <div class="aspect-w-16 aspect-h-9 mb-8">
+                    <img src="{{ listing.photo_main.url }}" alt="{{ listing.title }}" class="object-cover w-full h-full rounded-lg shadow-lg">
+                </div>
+
+                <!-- Thumbnails -->
+                <div class="grid grid-cols-3 gap-4 mb-12">
+                    {% if listing.photo_1 %}
+                    <a href="{{ listing.photo_1.url }}" data-lightbox="home-images">
+                        <img src="{{ listing.photo_1.url }}" alt="" class="object-cover h-32 w-full rounded-lg shadow-md hover:opacity-75 transition duration-300">
+                    </a>
+                    {% endif %}
+                    {% if listing.photo_2 %}
+                    <a href="{{ listing.photo_2.url }}" data-lightbox="home-images">
+                        <img src="{{ listing.photo_2.url }}" alt="" class="object-cover h-32 w-full rounded-lg shadow-md hover:opacity-75 transition duration-300">
+                    </a>
+                    {% endif %}
+                    {% if listing.photo_3 %}
+                    <a href="{{ listing.photo_3.url }}" data-lightbox="home-images">
+                        <img src="{{ listing.photo_3.url }}" alt="" class="object-cover h-32 w-full rounded-lg shadow-md hover:opacity-75 transition duration-300">
+                    </a>
+                    {% endif %}
+                    {% if listing.photo_4 %}
+                    <a href="{{ listing.photo_4.url }}" data-lightbox="home-images">
+                        <img src="{{ listing.photo_4.url }}" alt="" class="object-cover h-32 w-full rounded-lg shadow-md hover:opacity-75 transition duration-300">
+                    </a>
+                    {% endif %}
+                    {% if listing.photo_5 %}
+                    <a href="{{ listing.photo_5.url }}" data-lightbox="home-images">
+                        <img src="{{ listing.photo_5.url }}" alt="" class="object-cover h-32 w-full rounded-lg shadow-md hover:opacity-75 transition duration-300">
+                    </a>
+                    {% endif %}
+                    {% if listing.photo_6 %}
+                    <a href="{{ listing.photo_6.url }}" data-lightbox="home-images">
+                        <img src="{{ listing.photo_6.url }}" alt="" class="object-cover h-32 w-full rounded-lg shadow-md hover:opacity-75 transition duration-300">
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Property Details -->
+                <div class="bg-white shadow-lg rounded-lg p-8 mb-12">
+                    <h2 class="text-3xl font-bold mb-6">Property Details</h2>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            <div>
+                                <p class="text-sm text-gray-500">Price</p>
+                                <p class="font-semibold">₹{{ listing.price | intcomma }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                            </svg>
+                            <div>
+                                <p class="text-sm text-gray-500">Bedrooms</p>
+                                <p class="font-semibold">{{ listing.bedrooms }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <div>
+                                <p class="text-sm text-gray-500">Bathrooms</p>
+                                <p class="font-semibold">{{ listing.bathrooms }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                            </svg>
+                            <div>
+                                <p class="text-sm text-gray-500">Garage</p>
+                                <p class="font-semibold">{{ listing.garage }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                            </svg>
+                            <div>
+                                <p class="text-sm text-gray-500">Square Feet</p>
+                                <p class="font-semibold">{{ listing.sqft }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                            </svg>
+                            <div>
+                                <p class="text-sm text-gray-500">Lot Size</p>
+                                <p class="font-semibold">{{ listing.lot_size }} Sq.ft</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="bg-white shadow-lg rounded-lg p-8 mb-12">
+                    <h3 class="text-2xl font-bold mb-4">Description</h3>
+                    <p class="text-gray-600 leading-relaxed">{{ listing.description }}</p>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <div class="bg-white shadow-lg rounded-lg p-8 sticky top-6">
+                    <h2 class="text-3xl font-bold mb-6">₹{{ listing.price | intcomma }}</h2>
+                    <button class="w-full bg-black text-white py-3 px-4 rounded-lg hover:bg-gray-800 transition duration-300 mb-6" data-toggle="modal" data-target="#inquiryModal">
+                        Make An Inquiry
+                    </button>
+                    <div class="text-center">
+                        <p class="text-sm text-gray-500 mb-2">Listed by</p>
+                        <p class="font-semibold text-lg">{{ listing.realtor }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Inquiry Modal -->
+<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-lg shadow-xl">
+            <div class="modal-header border-b-0 p-6">
+                <h5 class="modal-title text-2xl font-bold" id="inquiryModalLabel">Make An Inquiry</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-6">
+                <form action="{% url 'contact' %}" method="POST">
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                    {% else %}
+                    <input type="hidden" name="user_id" value="0">
+                    {% endif %}
+                    <input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
+                    <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                    <div class="mb-6">
+                        <label for="property_name" class="block text-sm font-medium text-gray-700 mb-2">Property:</label>
+                        <input type="text" name="listing" id="property_name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" value="{{ listing.title }}" readonly>
+                    </div>
+                    <div class="mb-6">
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name:</label>
+                        <input type="text" name="name" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email:</label>
+                        <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone:</label>
+                        <input type="text" name="phone" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message:</label>
+                        <textarea name="message" id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black" required></textarea>
+                    </div>
+                    <div class="mt-8">
+                        <button type="submit" class="w-full bg-black text-white py-3 px-4 rounded-lg hover:bg-gray-800 transition duration-300">Send Inquiry</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    .modal-open {
+        overflow: hidden;
+    }
+    .modal-backdrop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        display: none;
+        overflow: hidden;
+        outline: 0;
+    }
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 0.5rem;
+        pointer-events: none;
+    }
+    .modal.fade .modal-dialog {
+        transition: transform 0.3s ease-out;
+        transform: translate(0, -50px);
+    }
+    .modal.show .modal-dialog {
+        transform: none;
+    }
+    @media (min-width: 576px) {
+        .modal-dialog {
+            max-width: 500px;
+            margin: 1.75rem auto;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('inquiryModal');
+        const openModalBtn = document.querySelector('[data-toggle="modal"]');
+        const closeModalBtn = modal.querySelector('.close');
+
+        openModalBtn.addEventListener('click', function() {
+            modal.classList.add('show');
+            document.body.classList.add('modal-open');
+        });
+
+        closeModalBtn.addEventListener('click', function() {
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.classList.remove('show');
+                document.body.classList.remove('modal-open');
+            }
+        });
+    });
+</script>
+{% endblock %}

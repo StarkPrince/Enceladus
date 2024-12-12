@@ -1,0 +1,57 @@
+{% load static %}
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <a href="{% url 'index' %}" class="flex items-center">
+                <img src="{% static 'img/drogo.png' %}" class="h-10 w-10 mr-2" alt="IN Homes Logo">
+                <span class="font-bold text-xl text-black">IN Homes</span>
+            </a>
+            <div class="hidden md:flex space-x-4">
+                <a href="{% url 'index' %}" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium {% if '/' == request.path %} bg-gray-200 {% endif %}">Home</a>
+                <a href="{% url 'about' %}" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium {% if '/about' == request.path %} bg-gray-200 {% endif %}">About</a>
+                <a href="{% url 'listings' %}" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium {% if '/listings/' == request.path %} bg-gray-200 {% endif %}">Featured Listings</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium {% if '/account/dashboard' == request.path %} bg-gray-200 {% endif %}">Dashboard</a>
+                    <form action="{% url 'logout' %}" method="POST" id="logout" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'register' %}" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium {% if '/account/register' == request.path %} bg-gray-200 {% endif %}">Register</a>
+                    <a href="{% url 'login' %}" class="text-black hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium {% if '/account/login' == request.path %} bg-gray-200 {% endif %}">Login</a>
+                {% endif %}
+            </div>
+            <button class="md:hidden focus:outline-none" id="menu-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="{% url 'index' %}" class="text-black hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium {% if '/' == request.path %} bg-gray-200 {% endif %}">Home</a>
+                <a href="{% url 'about' %}" class="text-black hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium {% if '/about' == request.path %} bg-gray-200 {% endif %}">About</a>
+                <a href="{% url 'listings' %}" class="text-black hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium {% if '/listings/' == request.path %} bg-gray-200 {% endif %}">Featured Listings</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboard' %}" class="text-black hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium {% if '/account/dashboard' == request.path %} bg-gray-200 {% endif %}">Dashboard</a>
+                    <form action="{% url 'logout' %}" method="POST" id="logout-mobile">
+                        {% csrf_token %}
+                        <button type="submit" class="text-black hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'register' %}" class="text-black hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium {% if '/account/register' == request.path %} bg-gray-200 {% endif %}">Register</a>
+                    <a href="{% url 'login' %}" class="text-black hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium {% if '/account/login' == request.path %} bg-gray-200 {% endif %}">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+<div class="bg-white min-h-screen">
+    <header class="bg-black text-white py-16">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-6">Search Properties</h1>
+            <form action="{% url 'search' %}" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input type="text" name="keywords" class="px-4 py-2 rounded-md" placeholder="Keyword (Pool, Garage, etc)" value="{{ values.keywords }}">
+                <input type="text" name="city" class="px-4 py-2 rounded-md" placeholder="City" value="{{ values.city }}">
+                <select name="state" class="px-4 py-2 rounded-md">
+                    <option selected="true" disabled="disabled">State (All)</option>
+                    {% for key,value in state_choices.items %}
+                        <option value="{{ key }}" {% if key == values.state %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+                <select name="bedrooms" class="px-4 py-2 rounded-md">
+                    <option selected="true" disabled="disabled">Bedrooms (Any)</option>
+                    {% for key,value in bedroom_choices.items %}
+                        <option value="{{ value }}" {% if key == values.bedrooms %}selected{% endif %}>{{ key }}</option>
+                    {% endfor %}
+                </select>
+                <select name="price" class="px-4 py-2 rounded-md">
+                    <option selected="true" disabled="disabled">Max Price (All)</option>
+                    {% for key,value in price_choices.items %}
+                        <option value="{{ key }}" {% if key == values.price %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select>
+                <button class="bg-white text-black px-4 py-2 rounded-md hover:bg-gray-200 transition duration-300" type="submit">Search</button>
+            </form>
+        </div>
+    </header>
+
+    <nav class="container mx-auto px-4 py-4">
+        <ol class="flex text-sm">
+            <li class="mr-2">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-black">Home</a>
+            </li>
+            <li class="mr-2">
+                <a href="{% url 'listings' %}" class="text-gray-600 hover:text-black">Browse Listings</a>
+            </li>
+            <li class="text-black font-semibold">Search Results</li>
+        </ol>
+    </nav>
+
+    <section class="container mx-auto px-4 py-8">
+        {% if listings %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for listing in listings %}
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <img class="w-full h-48 object-cover" src="{{ listing.photo_main.url }}" alt="{{ listing.title }}">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold mb-2">{{ listing.title }}</h2>
+                        <p class="text-gray-600 mb-4">
+                            <i class="fas fa-map-marker text-black mr-2"></i>{{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}
+                        </p>
+                        <div class="mb-4">
+                            <span class="bg-black text-white px-2 py-1 rounded-full text-sm font-semibold">₹{{ listing.price | intcomma }}</span>
+                        </div>
+                        <div class="flex justify-between text-sm mb-4">
+                            <div><i class="fas fa-th-large text-black mr-2"></i>{{ listing.sqft }} sqft</div>
+                            <div><i class="fas fa-car text-black mr-2"></i>{{ listing.garage }} garage</div>
+                        </div>
+                        <div class="flex justify-between text-sm mb-4">
+                            <div><i class="fas fa-bed text-black mr-2"></i>{{ listing.bedrooms }} bedrooms</div>
+                            <div><i class="fas fa-bath text-black mr-2"></i>{{ listing.bathrooms }} bathrooms</div>
+                        </div>
+                        <div class="mb-4 text-sm">
+                            <i class="fas fa-user text-black mr-2"></i>{{ listing.realtor }}
+                        </div>
+                        <div class="mb-4 text-sm">
+                            <i class="fas fa-clock text-black mr-2"></i>{{ listing.list_date | timesince }} ago
+                        </div>
+                        <a href="{% url 'listing' listing.id %}" class="block w-full bg-black text-white text-center py-2 rounded-md hover:bg-gray-800 transition duration-300">More Info</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center text-gray-600">No Listings Available</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

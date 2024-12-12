@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+{% load static %}
+
+{% block title %}Browse Property Listings{% endblock %}
+
+{% block content %}
+<div class="bg-white min-h-screen">
+    <header class="bg-black text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold mb-4">Discover Your Dream Home</h1>
+            <p class="text-xl max-w-2xl mx-auto">Explore our curated collection of premium properties, each offering a unique blend of comfort, style, and luxury.</p>
+        </div>
+    </header>
+
+    <nav class="container mx-auto px-4 py-6">
+        <ol class="flex text-sm">
+            <li class="mr-2">
+                <a href="{% url 'index' %}" class="text-gray-600 hover:text-black transition duration-300">Home</a>
+            </li>
+            <li class="text-black font-semibold">Browse Listings</li>
+        </ol>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12">
+        {% if listings %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {% for listing in listings %}
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden transition duration-300 transform hover:-translate-y-1 hover:shadow-2xl">
+                <img class="w-full h-64 object-cover" src="{{ listing.photo_main.url }}" alt="{{ listing.title }}">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-2xl font-bold">{{ listing.title }}</h2>
+                        <span class="bg-black text-white px-3 py-1 text-sm font-semibold rounded-full">₹{{ listing.price | intcomma }}</span>
+                    </div>
+                    <p class="text-gray-600 mb-4 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}
+                    </p>
+                    <div class="flex justify-between mb-6 text-sm">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                            </svg>
+                            {{ listing.bedrooms }} beds
+                        </span>
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            {{ listing.bathrooms }} baths
+                        </span>
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                            </svg>
+                            {{ listing.sqft }} sqft
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            {{ listing.realtor }}
+                        </span>
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            {{ listing.list_date | timesince }} ago
+                        </span>
+                    </div>
+                    <a href="{% url 'listing' listing.id %}" class="block w-full bg-black text-white text-center py-3 px-4 rounded-lg hover:bg-gray-800 transition duration-300">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-center text-gray-600 text-xl">No Listings Available</p>
+        {% endif %}
+
+        {% if listings.has_other_pages %}
+        <div class="flex justify-center mt-12">
+            <nav class="inline-flex rounded-md shadow-sm">
+                {% if listings.has_previous %}
+                <a href="?page={{ listings.previous_page_number }}" class="px-4 py-2 rounded-l-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">
+                    Previous
+                </a>
+                {% endif %}
+                
+                {% for i in listings.paginator.page_range %}
+                {% if listings.number == i %}
+                <span class="px-4 py-2 border-t border-b border-gray-300 bg-black text-white">
+                    {{ i }}
+                </span>
+                {% else %}
+                <a href="?page={{ i }}" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">
+                    {{ i }}
+                </a>
+                {% endif %}
+                {% endfor %}
+                
+                {% if listings.has_next %}
+                <a href="?page={{ listings.next_page_number }}" class="px-4 py-2 rounded-r-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition duration-300">
+                    Next
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+    </main>
+</div>
+{% endblock %}
+
+{% block extra_head %}
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+</style>
+{% endblock %}

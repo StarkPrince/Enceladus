@@ -9,7 +9,8 @@ SECRET_KEY = '7)mio^xmnjh!q)28xja_wxfp=9cy5s&7+8ljbi)-vnmsid55!s'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['prrealestate.herokuapp.com']
+ALLOWED_HOSTS = ['prrealestate.herokuapp.com', 'localhost', '127.0.0.1']
+TAILWIND_APP_NAME = 'theme'
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
@@ -24,6 +25,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'tailwind',
+      'theme'
+]
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -42,7 +49,7 @@ ROOT_URLCONF = 'leonidas.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'themes/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -56,17 +63,30 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'leonidas.wsgi.application'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'd4sa61bhknctoi',
+#         'USER': 'tjlooptivvqqfk',
+#         'PASSWORD': '8091aab12543fde5f9a0b2ca712c43d500325ef504db6fac3ed7fd3e15d20954',
+#         'HOST': 'ec2-52-45-183-77.compute-1.amazonaws.com',
+#         'PORT': 5432,
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd4sa61bhknctoi',
-        'USER': 'tjlooptivvqqfk',
-        'PASSWORD': '8091aab12543fde5f9a0b2ca712c43d500325ef504db6fac3ed7fd3e15d20954',
-        'HOST': 'ec2-52-45-183-77.compute-1.amazonaws.com',
-        'PORT': 5432,
+        'NAME': 'realestate',
+        'USER': 'postgres',
+        'PASSWORD': 'Prince@2002',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -111,5 +131,5 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'games.princeraj@gmail.com'
 EMAIL_HOST_PASSWORD = 'GameChanger'
 EMAIL_USE_TLS = True
-
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
