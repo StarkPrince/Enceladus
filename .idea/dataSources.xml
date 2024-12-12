@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
     <data-source source="LOCAL" name="Django default" uuid="df76181f-242b-47da-8492-4f4af075e51d">
@@ -7,7 +6,7 @@
       <imported>true</imported>
       <remarks>$PROJECT_DIR$/leonidas/settings.py</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/realestate</jdbc-url>
+      <jdbc-url>jdbc:postgresql://None:None/None</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
